@@ -1,7 +1,26 @@
-This repository contains a few sample projects that show how to configure source code analysis from [GitHub Actions](https://developer.github.com/actions/).
+# Security
 
-Configuration depends on the build tool:
+## Use case
+This example demonstrates:
+- Vulnerabilities
+- Security Hotspots
 
-* See the [`gradle` branch](https://github.com/sonarsource/sonarcloud-github-action-samples/tree/gradle) for Gradle projects. 
-* See the [`maven` branch](https://github.com/sonarsource/sonarcloud-github-action-samples/tree/maven) for Maven projects.
-* See the [`generic` branch](https://github.com/sonarsource/sonarcloud-github-action-samples/tree/generic) for projects that use other build tools (PHP, Python, COBOL, PL/SQL, ...). 
+It also demonstrates the possibility to define your own custom sources, sanitizers and sinks to detect more injection cases
+(or avoid false positives)
+
+## Usage
+
+Run `./run.sh`
+
+This will:
+- Delete the project key **training:security** if it exists in SonarQube (to start from a scratch)
+- Run `mvn clean verify sonar:sonar` to re-create the project
+
+Project consists of a single class (`training.security.Insecure.java`) with a number of Vulnerabilities and Security Hotspots.
+
+## Custom security configuration 
+At the bottom of the class you see a bunch of methods that demonstrate custom injections.
+- The method without sanitization (`doSomething()`) has an injection vulnerability
+- The method with custom sanitization (`doSomethingSanitized()`) has no vulnerability
+
+The custom security configuration file is in the root directory [here](s3649JavaSqlInjectionConfig.json)
