@@ -1,3 +1,0 @@
-<?php
-
-  define("FOO", "BAR");

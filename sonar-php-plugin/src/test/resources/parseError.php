@@ -1,2 +1,0 @@
-<?php
-invalid php code
